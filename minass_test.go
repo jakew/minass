@@ -1,12 +1,9 @@
 package minass
 
 import (
-	"bytes"
 	"fmt"
 	"time"
 )
-
-var want, got = "1234", "12345"
 
 func init() {
 	// Replace the default runtime.Caller with a deterministic version.
@@ -15,18 +12,6 @@ func init() {
 		line = 123
 		return
 	}
-}
-
-type fakeTestingT struct {
-	logged *bytes.Buffer
-	failed bool
-}
-
-func (fakeTestingT) Helper() {}
-
-func (t *fakeTestingT) Errorf(format string, args ...interface{}) {
-	fmt.Fprintf(t.logged, format, args...)
-	t.failed = true
 }
 
 type exampleTestingT struct{}
@@ -41,7 +26,7 @@ var t = &exampleTestingT{}
 
 var wantToBeNotNil *struct{} = nil
 
-func ExampleAssert_Nil() {
+func ExampleValueAssertion_Nil() {
 	val := "value"
 	// Example with no message.
 	Assert(t, "value").Nil()
@@ -72,7 +57,7 @@ var (
 	wantToBeFalse = true
 )
 
-func ExampleAssert_True_NoMessage() {
+func ExampleValueAssertion_True_NoMessage() {
 	// Example with no message.
 	Assert(t, wantToBeTrue).True()
 
@@ -114,7 +99,7 @@ func ExampleAssert_True_NoMessage() {
 	// value is false; expected true
 }
 
-func ExampleAssert_True_BadExamples() {
+func ExampleValueAssertion_True_BadExamples() {
 	// Example wrong value type.
 	Assert(t, "string value").True()
 
@@ -184,8 +169,6 @@ func ExampleValueAssertion_Contains() {
 }
 
 var wantedKey = "wantedKey"
-var gotKey = "gotKey"
-
 var gotMap = map[string]string{"gotKey": gotText}
 var wantedMap = map[string]string{"wantedKey": wantedText}
 
