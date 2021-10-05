@@ -72,3 +72,5 @@ Conditions for function assertion `AssertFn(t, func() {...})`:
 If you find a bug or want a new assertion type or condition, feel free to make a
 ticket. If you want to help out, check out the tickets that are looking for
 help.
+
+Release process is that defined by [Go](https://golang.org/doc/modules/publishing#publishing-steps).
